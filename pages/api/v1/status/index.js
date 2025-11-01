@@ -28,7 +28,7 @@ async function getHandler(req, res) {
   const databaseOpenedConnectionsValue =
     databaseOpenedConnectionsResult.rows[0].count;
 
-  res.status(200).json({
+  return res.status(200).json({
     updated_at: updatedAt,
     dependencies: {
       database: {
