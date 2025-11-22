@@ -5,6 +5,7 @@ import database from "infra/database.js";
 import migrator from "models/migrator.js";
 import user from "models/user.js";
 import session from "models/session.js";
+import activation from "models/activation";
 
 const emailHttpUrl = `http://${process.env.EMIAL_HTTP_HOST}:${process.env.EMIAL_HTTP_PORT}`;
 
@@ -93,6 +94,10 @@ function extractUUID(text) {
   return match ? match[0] : null;
 }
 
+async function activatedUser(userId) {
+  return await activation.activateUserByUserId(userId);
+}
+
 const orchestrator = {
   waitForAllServices,
   clearDatabase,
@@ -102,6 +107,7 @@ const orchestrator = {
   deleteAllEmails,
   getLastEmail,
   extractUUID,
+  activatedUser,
 };
 
 export default orchestrator;
